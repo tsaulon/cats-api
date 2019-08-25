@@ -1,7 +1,7 @@
 import { Controller, Get, Req, Res, Next, Delete, Query, Body, Post, Put } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
-import { CatService } from '../core/services/cat/cat.service';
-import { ICat } from '../core/interfaces/cat.interface';
+import { CatService } from '../../core/services/cat/cat.service';
+import { ICat } from '../../core/interfaces/cat.interface';
 
 @Controller('cats')
 export class CatsController {
