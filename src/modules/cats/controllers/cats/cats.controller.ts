@@ -3,6 +3,8 @@ import { CatService } from '../../core/services/cat/cat.service';
 import { ICat } from '../../core/models/interfaces/cat.interface';
 import { JoiValidationPipe } from '../../core/pipes/joi-validation';
 import { createCatSchema } from '../../core/models/schemas/create-cat.schema';
+import { ValidationPipe } from '../../core/pipes/validation.pipe';
+import { updateCatDto } from '../../core/models/classes/cat';
 
 @Controller('cats')
 export class CatsController {
@@ -27,7 +29,7 @@ export class CatsController {
     }
 
     @Put()
-    updateCat(@Body() update: ICat): void {
+    updateCat(@Body(new ValidationPipe()) update: updateCatDto): void {
         this.cats.updateOne(update);
     }
 
