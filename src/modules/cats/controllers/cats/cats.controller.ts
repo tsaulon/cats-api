@@ -1,7 +1,8 @@
-import { Controller, Get, Req, Res, Next, Delete, Query, Body, Post, Put } from '@nestjs/common';
-import { Request, Response, NextFunction } from 'express';
+import { Controller, Get, Delete, Query, Body, Post, Put, UsePipes } from '@nestjs/common';
 import { CatService } from '../../core/services/cat/cat.service';
 import { ICat } from '../../core/models/interfaces/cat.interface';
+import { JoiValidationPipe } from '../../core/pipes/joi-validation';
+import { createCatSchema } from '../../core/models/schemas/create-cat.schema';
 
 @Controller('cats')
 export class CatsController {
@@ -20,6 +21,7 @@ export class CatsController {
     }
 
     @Post()
+    @UsePipes(new JoiValidationPipe(createCatSchema))
     addOne(@Body() cat: ICat): void {
         this.cats.addOne(cat);
     }
